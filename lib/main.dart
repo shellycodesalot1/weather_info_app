@@ -1,3 +1,4 @@
+import 'dart:math'; // For random number generation
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,6 +30,21 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
   String _temperature = "--";
   String _condition = "--";
 
+  // Function to simulate fetching weather data
+  void _fetchWeatherData() {
+    setState(() {
+      _cityName = _cityController.text;
+      _temperature = (Random().nextInt(16) + 15).toString(); // Random temperature between 15 and 30
+      _condition = _getRandomCondition(); // Get random weather condition
+    });
+  }
+
+  // Helper function to randomly select a weather condition
+  String _getRandomCondition() {
+    List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
+    return conditions[Random().nextInt(conditions.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,16 +67,11 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
             SizedBox(height: 20),
             // Fetch Weather Button
             ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _cityName = _cityController.text;
-                });
-                // Here you can simulate or fetch weather data
-              },
+              onPressed: _fetchWeatherData, // Calls the function to simulate weather fetching
               child: Text('Fetch Weather'),
             ),
             SizedBox(height: 30),
-            // Placeholder for displaying weather data
+            // Display simulated weather data
             Text(
               'City: $_cityName',
               style: TextStyle(fontSize: 20),
