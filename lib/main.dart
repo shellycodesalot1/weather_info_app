@@ -1,4 +1,4 @@
-import 'dart:math'; // For random number generation
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
